@@ -65,6 +65,10 @@ class ActiveRecord::Encryption::EncryptableRecordTest < ActiveRecord::Encryption
       assert_raises ActiveRecord::Encryption::Errors::Decryption do
         post2.title
       end
+
+      assert_raises ActiveRecord::Encryption::Errors::Decryption do
+        post2.body
+      end
     end
 
     ActiveRecord::Encryption.with_encryption_context key_provider: key_provider2 do
@@ -74,6 +78,10 @@ class ActiveRecord::Encryption::EncryptableRecordTest < ActiveRecord::Encryption
       post1.reload
       assert_raises ActiveRecord::Encryption::Errors::Decryption do
         post1.title
+      end
+
+      assert_raises ActiveRecord::Encryption::Errors::Decryption do
+        post1.body
       end
     end
   end
